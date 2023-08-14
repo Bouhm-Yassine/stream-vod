@@ -1,15 +1,18 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { User } from 'src/app/shared/models/user.model';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   template: `
     <div *ngIf="users.length > 0; else nodata" class="h-96 overflow-auto mt-5 p-4 border-white border-2 border-solid rounded-lg">
       <ul>
-        <li *ngFor="let user of users" class="mb-4 pb-4 border-b-2 border-slate-400 flex justify-between items-center">
+        <li *ngFor="let user of users"
+          [routerLink]="['/user', user.login]"
+          class="mb-4 pb-4 border-b-2 border-slate-400 flex justify-between items-center cursor-pointer">
           <div class="flex items-center">
             <img class="rounded-full w-12 h-12 object-cover mr-4" [src]="user.avatar_url" />
             <span>{{user.login}}</span>
