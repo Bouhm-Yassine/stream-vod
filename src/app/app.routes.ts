@@ -2,12 +2,12 @@ import { Routes } from "@angular/router";
 
 export const routes: Routes = [
   {
-    path: "user-search",
-    loadComponent: () => import('./features/user-search/user-search.component').then(c => c.UserSearchComponent)
+    path: "user",
+    loadComponent: () => import('./features/user-feature/user/user.component').then(c => c.UserComponent)
   },
   {
     path: "",
-    redirectTo: "user-search",
+    redirectTo: "user",
     pathMatch: "full"
   }
 ]
