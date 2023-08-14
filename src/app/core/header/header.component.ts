@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   template: `
   <div class="bg-slate-900 h-12 flex items-center p-4">
-    <h1>Github user search AA</h1>
+    <h1>Github user search</h1>
   </div>
   `,
   styles: [
