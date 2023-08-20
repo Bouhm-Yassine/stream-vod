@@ -1,16 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input, signal } from '@angular/core';
 import { UsersService } from 'src/app/core/services/users.service';
-import { UserDetails } from 'src/app/shared/models/user.model';
+import { UserCardComponent } from '../user-card/user-card.component';
 
 @Component({
   selector: 'app-user-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, UserCardComponent],
   template: `
-  <pre>
-    {{userDetail() | json}}
-  </pre>
+  <app-user-card [userDetails]="userDetails()"/>
   `,
   styles: [
   ],
@@ -19,11 +17,13 @@ import { UserDetails } from 'src/app/shared/models/user.model';
 export class UserDetailsComponent {
   constructor(private userService: UsersService) { }
 
-  userDetail = signal({})
+  userDetails = signal({})
 
   @Input() set username(value: string) {
-    console.log('= uSER NAME', value)
-    this.userService.searchUser(value).subscribe(data => this.userDetail.set(data))
+    this.getUserDetails(value)
   }
 
+  getUserDetails(username: string) {
+    this.userService.searchUser(username).subscribe(data => this.userDetails.set(data))
+  }
 }
